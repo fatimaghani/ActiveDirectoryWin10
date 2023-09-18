@@ -19,32 +19,32 @@ I set the Hardware Base Memory to 2048 MB, Virtual Disk Size to 20 GB and Proces
 <p align="left"><img src="https://i.imgur.com/ru1x7Cz.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
 
 For the Virtual Machine that will be hosting my Domain Controller, I need two network adapters. I need the NAT that will use my host IP address from my home router and an Internal Network Adapter so that my DC can communicate with other Virtual Machines. We will leave Adapter 1 as is (Default: NAT), but we will configure Adapter 2 as the Internal Network. 
-<p align="left"><img src="https://i.imgur.com/YIIhqmg.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/YIIhqmg.png" height="50%" width="50%" alt="Create Virtual Machine 1"/></p>
 Upon starting "DC", selecting the "Windows Server 2019" ISO file as the boot media. Install Server 2019 on the Virtual Machine.
-<p align="left"><img src="https://i.imgur.com/YlQw8G5.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/YlQw8G5.png" height="50%" width="50%" alt="Create Virtual Machine 2"/></p>
 
 ##  Assign IP addressing for the Internal Network in the VM.
 After downloading Windows Server 2019 on the Virtual Machine, I will configure and rename the two network adapters I have (external and internal NIC) so it is easier to tell them apart for future configurations.
-<p align="left"><img src="https://i.imgur.com/5T85FDv.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/5T85FDv.png" height="50%" width="50%" alt="NETWORKS"/></p>
 I will leave the _INTERNET_ as is, but I will apply the following settings to the _INTERNAL_X network:
-<p align="left"><img src="https://i.imgur.com/5Ba8r07.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/5Ba8r07.png" height="50%" width="50%" alt="INTNETWORK"/></p>
 
 ##  Name the server and install Active Directory to create the domain.
 Go to the Server Manager > Add Roles and Features.
 Leave all settings to default, except check 'Active Directory Domain Services' in the Server Roles tab and install.
-<p align="left"><img src="https://i.imgur.com/z9CwOgt.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/z9CwOgt.png" height="50%" width="50%" alt=AD Domain Services"/></p>
 Configure the Active Directory Domain Services set up.
-<p align="left"><img src="https://i.imgur.com/fxfhw4T.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/fxfhw4T.png" height="50%" width="50%" alt="Active Directory Set up"/></p>
 
 ##  Configure routing so that clients on the private network can access the internet through the domain controller.
 Go to the Server Manager > Add Roles and Features.
 Leave all settings to default, except:
 check 'Remote Access' in the Server Roles tab
 check 'Direct Access and VPN (RAS)' and 'Routing' under the  Role Services tab
-<p align="left"><img src="https://i.imgur.com/KFYOz3B.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/KFYOz3B.png" height="50%" width="50%" alt="Remote Access services"/></p>
 Configure the Remote Access set up.
-<p align="left"><img src="https://i.imgur.com/mClVd75.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
-<p align="left"><img src="https://i.imgur.com/rzasCSI.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/mClVd75.png" height="50%" width="50%" alt="Remote Access services set up 1"/></p>
+<p align="left"><img src="https://i.imgur.com/rzasCSI.png" height="50%" width="50%" alt="Remote Access services set up 2"/></p>
 
 ![](attachments/Pasted%20image%2020230402153904.png)
 
@@ -54,40 +54,40 @@ Configure the Remote Access set up.
 Go to the Server Manager > Add Roles and Features.
 Leave all settings to default, except:
 check 'DHCP' in the Server Roles tab and install.
-<p align="left"><img src="https://i.imgur.com/ChWflpy.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/ChWflpy.png" height="50%" width="50%" alt="set up DHCP"/></p>
 Configure the DHCP set up using:
-<p align="left"><img src="https://i.imgur.com/pp3LqZc.png" height="30%" width="30%" alt="Create Virtual Machine"/></p>
-<p align="left"><img src="https://i.imgur.com/fGgy3kZ.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/pp3LqZc.png" height="30%" width="30%" alt="DHCP Config 1"/></p>
+<p align="left"><img src="https://i.imgur.com/fGgy3kZ.png" height="50%" width="50%" alt="DHCP Config 2"/></p>
 
 ##  Run the PowerShell script to create 1000 users in Active Directory.
 
 [Power Shell script for creating users](https://github.com/joshmadakor1/AD_PS)
-<p align="left"><img src="https://i.imgur.com/9Rb1qK1.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/9Rb1qK1.png" height="50%" width="50%" alt="AD Powershell"/></p>
 We can observe the output of the newly created users here in the Active Directory.
-<p align="left"><img src="https://i.imgur.com/MLimmaz.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/MLimmaz.png" height="50%" width="50%" alt="Users in AD"/></p>
 
 ##  Create a new 'Client' virtual machine
 
 Now we will create another virtual machine in VirtualBox named "Client1" and install Windows 10 on it that will act as a user.
-<p align="left"><img src="https://i.imgur.com/b5GUjfF.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/b5GUjfF.png" height="50%" width="50%" alt="Create Virtual Machine: Client"/></p>
 
 
 ##  Connect the Client machine to the private network and join it to the domain.
 
 Click Start > System > Rename this PC (Advanced)
 We will rename the Computer to CLIENT1 and join it to the domain 'mydomain.com'
-<p align="left"><img src="https://i.imgur.com/wl3SXbe.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
-<p align="left"><img src="https://i.imgur.com/ubr4gXt.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/wl3SXbe.png" height="50%" width="50%" alt="Connect client to domain"/></p>
+<p align="left"><img src="https://i.imgur.com/ubr4gXt.png" height="50%" width="50%" alt="ipconfig client"/></p>
 
 ##  Log into the Client machine with a domain account.
 
 We will log into MYDOMAIN with a user account created from the Powershell script to test if everything is configured correctly.
-<p align="left"><img src="https://i.imgur.com/PUtgGHu.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/PUtgGHu.png" height="50%" width="50%" alt="log into domain"/></p>
 We can ping the domain to see if we recieve a response.
-<p align="left"><img src="https://i.imgur.com/jj1Y5h5.png" height="40%" width="40%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/jj1Y5h5.png" height="40%" width="40%" alt="ping domain"/></p>
 
 'whoami'
-<p align="left"><img src="https://i.imgur.com/5MGBXAw.png" height="40%" width="40%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/5MGBXAw.png" height="40%" width="40%" alt="whoami"/></p>
 
 We can also head back into our server VM 'DC' to check how many computers or devices are currently connected to the domain. We can see that CLIENT1 computer is being properly recognized in Active Directory. 
-<p align="left"><img src="https://i.imgur.com/9IQmkwg.png" height="60%" width="60%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/9IQmkwg.png" height="60%" width="60%" alt="Client1 in AD"/></p>
