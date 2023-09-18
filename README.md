@@ -62,20 +62,32 @@ Configure the DHCP set up using:
 ##  Run the PowerShell script to create 1000 users in Active Directory.
 
 [Power Shell script for creating users](https://github.com/joshmadakor1/AD_PS)
+<p align="left"><img src="https://i.imgur.com/9Rb1qK1.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+We can observe the output of the newly created users here in the Active Directory.
+<p align="left"><img src="https://i.imgur.com/MLimmaz.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
 
-##  Create a new virtual machine named "Client1" and install Windows 10 on it.
+##  Create a new 'Client' virtual machine
 
-![](attachments/Pasted%20image%2020230402155056.png)
+Now we will create another virtual machine in VirtualBox named "Client1" and install Windows 10 on it that will act as a user.
+<p align="left"><img src="https://i.imgur.com/b5GUjfF.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
 
 
-##  Connect the client machine to the private network and join it to the domain.
+##  Connect the Client machine to the private network and join it to the domain.
 
-![](attachments/Pasted%20image%2020230402155713.png)
+Click Start > System > Rename this PC (Advanced)
+We will rename the Computer to CLIENT1 and join it to the domain 'mydomain.com'
+<p align="left"><img src="https://i.imgur.com/wl3SXbe.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+<p align="left"><img src="https://i.imgur.com/ubr4gXt.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
 
-![](attachments/Pasted%20image%2020230402155807.png)
+##  Log into the Client machine with a domain account.
 
-##  Log into the client machine with a domain account.
+We will log into MYDOMAIN with a user account created from the Powershell script to test if everything is configured correctly.
+<p align="left"><img src="https://i.imgur.com/PUtgGHu.png" height="50%" width="50%" alt="Create Virtual Machine"/></p>
+We can ping the domain to see if we recieve a response.
+<p align="left"><img src="https://i.imgur.com/jj1Y5h5.png" height="40%" width="40%" alt="Create Virtual Machine"/></p>
 
-![](attachments/Pasted%20image%2020230402160005.png)
+'whoami'
+<p align="left"><img src="https://i.imgur.com/5MGBXAw.png" height="40%" width="40%" alt="Create Virtual Machine"/></p>
 
-![](attachments/Pasted%20image%2020230402160120.png)
+We can also head back into our server VM 'DC' to check how many computers or devices are currently connected to the domain. We can see that CLIENT1 computer is being properly recognized in Active Directory. 
+<p align="left"><img src="https://i.imgur.com/9IQmkwg.png" height="60%" width="60%" alt="Create Virtual Machine"/></p>
